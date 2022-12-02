@@ -37,12 +37,12 @@
 (defun missing-option (condition)
   (invoke-restart 'opts:use-value '(EMPTY)))
 
-(defun main (&rest argv)
+(defun main ()
   (multiple-value-bind (options free-args)
       (handler-case
           (handler-bind ((opts:unknown-option #'unknown-option)
                          (opts:missing-required-option #'missing-option))
-            (opts:get-opts argv))
+            (opts:get-opts (uiop:command-line-arguments)))
         (opts:missing-arg (condition)
           (format t "fatal: option ~s needs an argument~%" (opts:option condition)))
         (opts:arg-parser-failed (condition)
@@ -56,7 +56,7 @@
                  (opts:exit 0))
     (when-option (options :day)
                  (when (eq it 'EMPTY)
-                   (format t "fatal: required option \"--day\" is missing")
+                   (format t "fatal: required option \"--day\" is missing~%")
                    (opts:exit 1))
                  (unless (not (and (>= it 1) (< it 26)))
                    (funcall (read-from-string (format nil "aoc-2022.~d::run" it)))
