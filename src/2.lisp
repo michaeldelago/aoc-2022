@@ -53,12 +53,11 @@
         (me (alexandria:assoc-value *match* (cadr game) :test #'equal)))
     (+ (alexandria:assoc-value *point-value* me)  
        (cond
-         ((eq opponent me) 3)
-         ((or (and (eq opponent 'ROCK) (eq me 'SCISSORS))
-              (and (eq opponent 'PAPER) (eq me 'ROCK))
-              (and (eq opponent 'SCISSORS)(eq me 'PAPER)))
-          0)
-         (t 6)))))
+         ((eq opponent me) 3) ;; draw
+         ((or (and (eq opponent 'ROCK)    (eq me 'SCISSORS)) ;; lose
+              (and (eq opponent 'PAPER)   (eq me 'ROCK))
+              (and (eq opponent 'SCISSORS)(eq me 'PAPER))) 0)
+         (t 6))))) ;; win
 
 ;; Feed a game and receive the score from that game
 ;; Calculate score under the assumption that the second item in list is an outcome
@@ -72,12 +71,12 @@
       ((eq outcome 'DRAW) (run-game-1 (list (car game) (car game))))
       ((eq outcome 'LOSE)
        (cond 
-         ((eq opponent 'ROCK) (run-game-1 (list (car game) "C")))
-         ((eq opponent 'PAPER) (run-game-1 (list (car game) "A")))
+         ((eq opponent 'ROCK)     (run-game-1 (list (car game) "C")))
+         ((eq opponent 'PAPER)    (run-game-1 (list (car game) "A")))
          ((eq opponent 'SCISSORS) (run-game-1 (list (car game) "B")))))
       ((eq outcome 'WIN)
        (cond
-         ((eq opponent 'ROCK) (run-game-1 (list (car game) "B")))
-         ((eq opponent 'PAPER) (run-game-1 (list (car game) "C")))
+         ((eq opponent 'ROCK)     (run-game-1 (list (car game) "B")))
+         ((eq opponent 'PAPER)    (run-game-1 (list (car game) "C")))
          ((eq opponent 'SCISSORS) (run-game-1 (list (car game) "A"))))))))
 
