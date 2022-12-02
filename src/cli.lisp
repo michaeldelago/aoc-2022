@@ -35,10 +35,11 @@
   (invoke-restart 'opts:skip-option))
 
 (defun missing-option (condition)
+  (declare (ignore condition))
   (invoke-restart 'opts:use-value '(EMPTY)))
 
 (defun main ()
-  (multiple-value-bind (options free-args)
+  (multiple-value-bind (options )
       (handler-case
           (handler-bind ((opts:unknown-option #'unknown-option)
                          (opts:missing-required-option #'missing-option))
