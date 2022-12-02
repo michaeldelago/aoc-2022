@@ -43,6 +43,11 @@
          (many-splits (loop repeat (length lines-input) collect "\\s")))
     (mapcar #'cl-ppcre:split many-splits lines-input)))
 
+;; Feed a game and receive the score from that game
+;; Calculate score under the assumption that the second item in list is a move
+; (run-game-1 (list "A" "Y")) => 8
+; (run-game-1 (list "B" "X")) => 1
+; (run-game-1 (list "C" "Z")) => 6
 (defun run-game-1 (game)
   (let ((opponent (alexandria:assoc-value *match* (car game) :test #'equal))
         (me (alexandria:assoc-value *match* (cadr game) :test #'equal)))
@@ -55,6 +60,11 @@
           0)
          (t 6)))))
 
+;; Feed a game and receive the score from that game
+;; Calculate score under the assumption that the second item in list is an outcome
+; (run-game-1 (list "A" "Y")) => 4
+; (run-game-1 (list "B" "X")) => 1
+; (run-game-1 (list "C" "Z")) => 7
 (defun run-game-2 (game)
   (let ((opponent (alexandria:assoc-value *match* (car game) :test #'equal))
         (outcome (alexandria:assoc-value *match-2* (cadr game) :test #'equal)))
