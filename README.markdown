@@ -14,4 +14,4 @@ Copyright (c) 2022 Mike Delago
 
 ## License
 
-Licensed under the WTFPL License.
+Licensed under the 0BSD License.

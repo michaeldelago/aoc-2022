@@ -1,7 +1,7 @@
 (defsystem "aoc-2022"
   :version "0.1.0"
   :author "Mike Delago"
-  :license "WTFPL"
+  :license "0BSD"
   :depends-on ("alexandria"
                "cl-cookie"
                "cl-ppcre"
@@ -23,7 +23,7 @@
 
 (defsystem "aoc-2022/tests"
   :author "Mike Delago"
-  :license "WTFPL"
+  :license "0BSD"
   :depends-on ("aoc-2022"
                "rove")
   :components ((:module "tests"
