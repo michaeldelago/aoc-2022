@@ -36,7 +36,10 @@
          (back (subseq rucksack midpoint (length rucksack))))
     (string-intersection front back)))
 
-;; Slower implementation
+;; - Slightly slower 
+;; - Minimal garbage generated
+;; - messy code
+;; - no nil protection (easy fix though) 
 ;(defun match-badge (larry curly moe)
 ;  "Take 3 elves' rucksacks and match them for a single common letter"
 ;  (let* ((found-char 
@@ -47,7 +50,9 @@
 ;         (value (char-code found-char)))
 ;    (item-value value)))
 
-;; Slightly faster implementation
+;; + Slightly faster
+;; + cleaner
+;; - Generates a shit-ton of garbage
 (defun string-intersection (&rest strings)
   (item-value (char-code (car (reduce #'nintersection 
           (mapcar (lambda (str) (coerce str 'list)) strings))))))
