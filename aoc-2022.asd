@@ -13,8 +13,10 @@
                 :components
                 ((:file "get-input")
                  (:file "day")
+                 (:file "helpers")
                  (:file "1")
                  (:file "2")
+                 (:file "3")
                  (:file "cli"))))
   :description "Advent of Code 2022"
   :in-order-to ((test-op (test-op "aoc-2022/tests")))
