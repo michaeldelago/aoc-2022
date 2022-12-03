@@ -23,6 +23,7 @@
 
 (declaim (ftype (function (fixnum) (values string &optional)) get-day))
 (defun get-day (day)
+  "Get advent-of-code input for a given day"
   (unless (and (>= day 1) (< day 26))
     (error 'day-out-of-range :day day))
   (uiop:with-current-directory (*inputs-dir*)
@@ -34,6 +35,7 @@
 
 (declaim (ftype (function (integer) (values string &optional)) get-day-sample))
 (defun get-day-sample (day)
+  "Get advent-of-code example input for a given day"
   (unless (and (>= day 1) (< day 26))
     (error 'day-out-of-range :day day))
   (uiop:with-current-directory (*inputs-dir*)
@@ -57,7 +59,7 @@
          (raw-html (dex:get url :cookie-jar *cookies*))
          (parsed (lquery:$ (initialize raw-html)))
          (sample (aref (lquery:$ parsed *sample-css-path* (text)) 0)))
-    (progn (write-string-into-file sample
+    (progn (write-string-into-file sample 
                                  (make-pathname :name filename :directory *inputs-dir*))
          sample)))
 
