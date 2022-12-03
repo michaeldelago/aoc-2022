@@ -7,11 +7,15 @@
    #:run-sample-2))
 (in-package :aoc-2022.3)
 
-(defclass day-3 (day) ())
-(defparameter *day* (make-instance 'day-3 :day 3))
+(defclass day-3 (day) 
+  ((day
+     :initform 3)))
 
-(defun run ()
-  (do-run *day*))
+(defmethod run (&optional sample)
+  (let ((day (make-instance 'day-3)))
+    (if sample
+      (do-run-sample day)
+      (do-run day))))
 
 (defmethod part-1 ((this day-3) input)
   (let ((rucksacks (split-newlines input)))
@@ -25,6 +29,7 @@
                   collect (match-badge a b c)))))
 
 (defun get-rucksack-priority (rucksack)
+  "Take a single rucksack and match the common item within both halves/pockets of it"
   (let* ((midpoint (/ (length rucksack) 2))
          (front (subseq rucksack 0 midpoint))
          (back (subseq rucksack midpoint (length rucksack)))
@@ -35,15 +40,17 @@
     (item-value value)))
 
 (defun match-badge (larry curly moe)
+  "Take 3 elves' rucksacks and match them for a single common letter"
   (let* ((found-char 
-          (loop for badge across larry
-                when (and (find badge curly :test #'equal)
-                          (find badge moe :test #'equal))
-                return badge))
-        (value (char-code found-char)))
+           (loop for badge across larry
+                 when (and (find badge curly :test #'equal)
+                           (find badge moe :test #'equal))
+                 return badge))
+         (value (char-code found-char)))
     (item-value value)))
 
 (defun item-value (item)
+  "Match char to item priority"
   (1+ 
    (if (>= item (char-code #\a)) ;; if lowercase
        (- item (char-code #\a)) ;; char - (value of a, 97) 

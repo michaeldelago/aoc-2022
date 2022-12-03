@@ -1,18 +1,21 @@
 (uiop:define-package aoc-2022.1
   (:use :cl
-   :aoc-2022.get-input
-   :aoc-2022.day)
+        :aoc-2022.get-input
+        :aoc-2022.day)
   (:export #:run
-   #:run-sample-1
-   #:run-sample-2))
+           #:run-sample-1
+           #:run-sample-2))
 (in-package :aoc-2022.1)
 
+(defclass day-1 (day) 
+  ((day
+     :initform 1)))
 
-(defclass day-1 (day) ())
-(defparameter *day* (make-instance 'day-1 :day 1))
-
-(defun run ()
-  (do-run *day*))
+(defun run (&optional sample)
+  (let ((day (make-instance 'day-1)))
+   (if sample
+      (do-run-sample day)
+      (do-run day))))
 
 (defmethod part-1 ((this day-1) input)
   (apply #'max (get-elves-loads-total input)))
