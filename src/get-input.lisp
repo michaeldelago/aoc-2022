@@ -33,7 +33,7 @@
           (read-file-into-string filename)
           (get-aoc-input str-day)))))
 
-(declaim (ftype (function (integer) (values string &optional)) get-day-sample))
+(declaim (ftype (function (fixnum) (values string &optional)) get-day-sample))
 (defun get-day-sample (day)
   "Get advent-of-code example input for a given day"
   (unless (and (>= day 1) (< day 26))
