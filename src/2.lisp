@@ -1,9 +1,10 @@
 (uiop:define-package aoc-2022.2
   (:use :cl
-   :aoc-2022.day)
-  (:export #:run
-   #:run-sample-1
-   #:run-sample-2))
+        :aoc-2022.day)
+  (:export #:day-2
+           #:run
+           #:run-sample-1
+           #:run-sample-2))
 (in-package :aoc-2022.2)
 
 (defclass day-2 (day)

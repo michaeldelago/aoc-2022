@@ -2,7 +2,8 @@
   (:use :cl
         :aoc-2022.get-input
         :aoc-2022.day)
-  (:export #:run
+  (:export #:day-1
+           #:run
            #:run-sample-1
            #:run-sample-2))
 (in-package :aoc-2022.1)

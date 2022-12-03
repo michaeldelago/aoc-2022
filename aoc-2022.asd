@@ -3,6 +3,7 @@
   :author "Mike Delago"
   :license "0BSD"
   :depends-on ("alexandria"
+               "asdf"
                "cl-cookie"
                "cl-ppcre"
                "dexador"

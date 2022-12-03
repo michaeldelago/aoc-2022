@@ -4,25 +4,29 @@
 (in-package :aoc-2022/tests/main)
 
 (deftest day-1
-  (testing "sample-1"
-           (ok (eq (aoc-2022.1:run-sample-1 aoc-2022.1::*day*)
+  (let ((day (make-instance 'aoc-2022.1:day-1)))
+   (testing "sample-1"
+           (ok (eq (aoc-2022.1:run-sample-1 day)
                    24000)))
-  (testing "sample-2"
-           (ok (eq (aoc-2022.1:run-sample-2 aoc-2022.1::*day*)
-                   45000))))
+   (testing "sample-2"
+           (ok (eq (aoc-2022.1:run-sample-2 day)
+                   45000)))))
 
 (deftest day-2
-  (testing "sample-1"
-           (ok (eq (aoc-2022.2:run-sample-1 aoc-2022.2::*day*)
+  (let ((day (make-instance 'aoc-2022.2:day-2)))
+   (testing "sample-1"
+           (ok (eq (aoc-2022.2:run-sample-1 day)
                    15)))
-  (testing "sample-2"
-           (ok (eq (aoc-2022.2:run-sample-2 aoc-2022.2::*day*)
-                   12))))
+   (testing "sample-2"
+           (ok (eq (aoc-2022.2:run-sample-2 day)
+                   12)))))
+
 
 (deftest day-3
-  (testing "sample-1"
-           (ok (eq (aoc-2022.3:run-sample-1 aoc-2022.3::*day*)
+  (let ((day (make-instance 'aoc-2022.3:day-3)))
+   (testing "sample-1"
+           (ok (eq (aoc-2022.3:run-sample-1 day)
                    157)))
-  (testing "sample-2"
-           (ok (eq (aoc-2022.3:run-sample-2 aoc-2022.3::*day*)
-                   70))))
+   (testing "sample-2"
+           (ok (eq (aoc-2022.3:run-sample-2 day)
+                   70)))))
