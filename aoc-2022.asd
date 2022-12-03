@@ -6,6 +6,7 @@
                "cl-cookie"
                "cl-ppcre"
                "dexador"
+               "lquery"
                "uiop"
                "unix-opts")
   :components ((:module "src"
