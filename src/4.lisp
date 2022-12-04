@@ -1,13 +1,13 @@
 (uiop:define-package aoc-2022.4
   (:use :cl
-   :aoc-2022.day
-   :aoc-2022.helpers)
+        :aoc-2022.day
+        :aoc-2022.helpers)
   (:import-from :cl-ppcre
                 #:all-matches-as-strings)
   (:export #:day-4
-   #:run
-   #:run-sample-1
-   #:run-sample-2))
+           #:run
+           #:run-sample-1
+           #:run-sample-2))
 (in-package :aoc-2022.4)
 
 (defclass day-4 (day) 
