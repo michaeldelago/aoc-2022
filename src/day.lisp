@@ -29,7 +29,7 @@
     (format t "Part two: ~d~%" (part-2 this input))))
 
 (defmethod do-run-sample ((this day))
-  (let ((input (get-day 
+  (let ((input (get-day-sample 
                  (day this))))
     (format t "========== Day ~2d ===========~%" (day this))
     (format t "Part one sample: ~d~%" (part-1 this input))
