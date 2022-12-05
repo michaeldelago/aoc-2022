@@ -25,7 +25,7 @@
    :short #\s
    :long "sample")
   (:name :tz
-   :description "your timezone (if your machine doesn't use the local timezone)"
+   :description "your timezone, if your machine doesn't use the local timezone. example `--tz -5` for US/Eastern"
    :arg-parser (lambda (zone) (- (parse-integer zone)))
    :long "tz")
   (:name :latest
