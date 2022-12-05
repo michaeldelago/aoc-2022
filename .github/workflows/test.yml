@@ -26,8 +26,10 @@ jobs:
           LISP: ${{ matrix.lisp }}
         run: |
           curl -L https://raw.githubusercontent.com/roswell/roswell/master/scripts/install-for-ci.sh | sh
+          echo "~/.roswell/bin" >> $GITHUB_PATH
 
       - name: Run tests
+        env: 
+          LISP: "ros run"
         run: |
-          PATH="~/.roswell/bin:$PATH"
           make test
