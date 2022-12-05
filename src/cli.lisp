@@ -14,7 +14,6 @@
    :description "day to execute"
    :arg-parser #'parse-integer
    :short #\d
-   :required t
    :long "day"
    :meta-var "DAY")
   (:name :all
@@ -22,7 +21,7 @@
    :short #\a
    :long "all")
   (:name :sample
-   :description "run sample inputs"
+   :description "use sample inputs"
    :short #\s
    :long "sample")
   (:name :tz
@@ -68,7 +67,7 @@
       (when-option (options :help)
         (opts:describe
           :prefix "Advent of Code 2022"
-          :usage-of "ros aoc-2022.ros")
+          :usage-of "aoc-2022")
         (opts:exit 0))  
       (when-option (options :latest)
         (funcall (car (last completed-days)) do-sample)
@@ -85,7 +84,9 @@
           (funcall (nth (1- it) completed-days) do-sample)
           (opts:exit 0))
         (format t "fatal: day is out of range: [1,26)~%")
-        (opts:exit 1)))))
+        (opts:exit 1))
+			(format t "No options specified. Check `--help` for usage information.~%")
+			(opts:exit 1))))
 
 (defun latest-day-possible (&optional my-tz)
   "Get the latest day possible for your timezone. I have no idea if this works but it feels right"
