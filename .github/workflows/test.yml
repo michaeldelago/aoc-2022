@@ -1,0 +1,31 @@
+name: Test
+
+on:
+  push:
+    paths:
+      - "**.lisp"
+      - "**.asd"
+      - ".aoc-inputs/**"
+
+
+jobs:
+  test:
+    name: ${{ matrix.lisp }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        lisp: [sbcl-bin]
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install Roswell
+        env:
+          LISP: ${{ matrix.lisp }}
+          run: |
+            curl -L https://raw.githubusercontent.com/roswell/roswell/master/scripts/install-for-ci.sh | sh
+
+      - name: Run tests
+        run: |
+          make test
