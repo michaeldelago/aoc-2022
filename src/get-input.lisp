@@ -64,7 +64,7 @@
 
 (defun get-input-dir ()
   (ensure-directories-exist
-   (format nil "~aaoc-inputs/" (uiop:getcwd))
+   (format nil "~a.aoc-inputs/" (uiop:getcwd))
    :verbose t))
 
 (define-condition day-out-of-range (error)
