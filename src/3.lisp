@@ -12,7 +12,7 @@
   ((day
      :initform 3)))
 
-(defmethod run (&optional sample)
+(defun run (&optional sample)
   (let ((day (make-instance 'day-3)))
     (if sample
       (do-run-sample day)

@@ -14,18 +14,18 @@
   ((day
      :initform 4)))
 
-(defmethod run (&optional sample)
+(defun run (&optional sample)
   (let ((day (make-instance 'day-4)))
     (if sample
         (do-run-sample day)
         (do-run day))))
 
-(defmethod part-1 ((this day) input)
+(defmethod part-1 ((this day-4) input)
   (let ((sections (split-input input)))
     (loop for jobs in sections 
           count (apply #'subset-jobs-p jobs))))
 
-(defmethod part-2 ((this day) input)
+(defmethod part-2 ((this day-4) input)
   (let ((sections (split-input input)))
     (loop for jobs in sections
           count (apply #'overlapping-jobs-p jobs))))
