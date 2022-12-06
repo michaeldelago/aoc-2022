@@ -95,7 +95,7 @@
          rows))
 
 
-;; (do-instruction '(("N" "Z) ("D" "C" "M") ("P")) 
+;; (do-instruction '(("N" "Z") ("D" "C" "M") ("P")) 
 ;;                 (2 2 1))
 ;; => '(("C" "D" "N" "Z") 
 ;;       ("M") 
@@ -114,7 +114,7 @@
                     (setf (nth to new-crates) to-stk)) 
       new-crates)))
 
-;; (do-instruction '(("N" "Z) ("D" "C" "M") ("P")) 
+;; (do-instruction '(("N" "Z") ("D" "C" "M") ("P")) 
 ;;                 (2 2 1))
 ;; => '(("D" "C" "N" "Z") 
 ;;      ("M") 
@@ -131,3 +131,31 @@
         (setf (nth from new-crates) (subseq from-stk num-crates))
         (setf (nth to new-crates) (append substack to-stk))) 
       new-crates)))
+
+;; (do-instruction '(("N" "Z") ("D" "C" "M") ("P"))
+;;                 (2 2 1))
+;; => '(("C" "D" "N" "Z")
+;;       ("M")
+;;       ("P"))
+(defun ndo-instruction (crates instruction)
+  "Recieve the crates and an instruction, and execute the instruction on the crates. Destructive. Moves one crate at a time"
+  (destructuring-bind (num-crates from to)
+      (list (first instruction) (1- (second instruction)) (1- (third instruction)))
+    (loop repeat num-crates
+          collect (push (pop (nth from crates)) (nth to crates)))
+    crates))
+
+;; (do-instruction '(("N" "Z") ("D" "C" "M") ("P"))
+;;                 (2 2 1))
+;; => '(("D" "C" "N" "Z")
+;;      ("M")
+;;      ("P"))
+(defun ndo-instruction-9001 (crates instruction)
+  "Recieve the crates and an instruction, and execute the instruction on the crates. Destructive. Moves stacks of crates"
+  (destructuring-bind (num-crates from to)
+      (list (first instruction) (1- (second instruction)) (1- (third instruction)))
+    (progn
+      (setf (nth to crates)
+            (nconc (subseq (nth from crates) 0 num-crates) (nth to crates)))
+      (loop repeat num-crates do (pop (nth from crates)))
+      crates)))
