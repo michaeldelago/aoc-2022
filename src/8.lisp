@@ -53,11 +53,11 @@
 
 ;; get the scenic score for a tree
 (defun scenic-score (tree grid)
-  (destructuring-bind (left right down up)
+  (destructuring-bind (left right up down)
         (get-neighbors (car tree) grid)
-      (* (dist-until-block (nreverse left) tree grid)
-         (dist-until-block (nreverse up) tree grid)
-         (dist-until-block right tree grid)
+      (* (dist-until-block left tree grid)
+         (dist-until-block right  tree grid)
+         (dist-until-block up tree grid)
          (dist-until-block down tree grid))))
 
 (defun tree-on-edge (tree grid)
@@ -78,7 +78,7 @@
          (max-y (reduce #'max (loop for coord in tree-grid collect (cadar coord)))))
     (list
       (if (> x 0)
-          (loop for this-x from (1- x) to 0
+          (loop for this-x downfrom (1- x) to 0 ;; left
             collect (list this-x y))
           (list)) 
       (if (< x max-x)
@@ -86,11 +86,11 @@
             collect (list this-x y))
           (list)) 
      (if (> y 0)
-         (loop for this-y from (1+ y) to 0 ;; up 
+         (loop for this-y downfrom (1- y) to 0 ;; up 
             collect (list x this-y))
          (list)) 
       (if (< y max-y)
-         (loop for this-y from (1- y) to max-y ;; down
+         (loop for this-y from (1+ y) to max-y ;; down
             collect (list x this-y))
           (list)))))
 
