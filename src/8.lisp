@@ -97,9 +97,6 @@
 ;; Get the distance from a tree in a direction until blocked
 ;; the direction is a list of coordinates between the tree and the edge
 (defun dist-until-block (direction tree grid)
-  (print direction)
-  (print tree)
-  (princ #\NEWLINE)
   (if (tree-on-edge tree grid)
       0
       (loop for o-tree in direction
