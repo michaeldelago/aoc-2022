@@ -39,13 +39,9 @@
 (defun find-start-of-packet-marker (bytestream start-length)
   "Find the index after the packet marker for a stream of bytes"
   (loop for index from start-length
-        for grp = (subseq bytestream (- index start-length) index)
-;;        for left = (coerce (subseq bytestream (max 0 (- index start-length 3)) (- index start-length)) 'string) 
-;;        for right = (coerce (subseq bytestream index (+ index 3)) 'string) 
-;;        do (progn (sleep 0.125) (format t "Searching: ~a~C[31;1m~a~C[0m~a~C" left #\ESC (coerce grp 'string) #\ESC right  #\return) (finish-output nil) ) 
-        if (= (length (remove-duplicates grp)) 
-              start-length)
-;;          do (format t "~%") and 
-          return index))
+        if (= (length (remove-duplicates 
+                        (subseq bytestream (- index start-length) index))) 
+              start-length)  
+        return index))
 
 
