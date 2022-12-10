@@ -29,7 +29,6 @@
   (uiop:with-current-directory ((get-input-dir))
     (let* ((str-day (Write-to-string day))
            (filename (format nil "~d.~a" str-day suffix)))
-      (print filename)
       (if (probe-file filename)
           (read-file-into-string filename)
           (get-aoc-sample str-day filename)))))
