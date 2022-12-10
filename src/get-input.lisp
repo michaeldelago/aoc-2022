@@ -11,7 +11,6 @@
 (defparameter *base-url* "adventofcode.com")
 (defparameter *sample-css-path* "html body main article.day-desc pre code")
 
-(declaim (ftype (function (fixnum) (values string &optional)) get-day))
 (defun get-day (day)
   "Get advent-of-code input for a given day"
   (unless (and (>= day 1) (< day 26))
@@ -23,19 +22,18 @@
           (read-file-into-string filename)
           (get-aoc-input str-day)))))
 
-(declaim (ftype (function (fixnum) (values string &optional)) get-day-sample))
-(defun get-day-sample (day)
+(defun get-day-sample (day &optional (suffix "test"))
   "Get advent-of-code example input for a given day"
   (unless (and (>= day 1) (< day 26))
     (error 'day-out-of-range :day day))
   (uiop:with-current-directory ((get-input-dir))
     (let* ((str-day (Write-to-string day))
-           (filename (format nil "~d.test" str-day)))
+           (filename (format nil "~d.~a" str-day suffix)))
+      (print filename)
       (if (probe-file filename)
           (read-file-into-string filename)
           (get-aoc-sample str-day filename)))))
 
-(declaim (ftype (function (string) (values string &optional)) get-aoc-input))
 (defun get-aoc-input (day)
   (let* ((url (format nil "https://~a/~d/day/~d/input" *base-url* *year* day))
          (puzzle-input (dex:get url :cookie-jar (get-cookies))))
@@ -43,7 +41,6 @@
       (write-string-into-file puzzle-input (make-pathname :name day))
       puzzle-input)))
 
-(declaim (ftype (function (string string) (values string &optional)) get-aoc-sample))
 (defun get-aoc-sample (day filename)
   (let* ((url (format nil "https://~a/~d/day/~d" *base-url* *year* day))
          (raw-html (dex:get url :cookie-jar (get-cookies)))

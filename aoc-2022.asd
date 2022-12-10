@@ -14,7 +14,6 @@
                 :components
                 ((:file "get-input")
                  (:file "day")
-                 (:file "helpers")
                  (:file "1")
                  (:file "2")
                  (:file "3")
@@ -23,6 +22,7 @@
                  (:file "6")
                  (:file "7")
                  (:file "8")
+                 (:file "9")
                  (:file "cli"))))
   :description "Advent of Code 2022"
   :in-order-to ((test-op (test-op "aoc-2022/tests")))
@@ -44,6 +44,7 @@
                  (:file "5")
                  (:file "6")
                  (:file "7")
-                 (:file "8"))))
+                 (:file "8")
+                 (:file "9"))))
   :description "Test system for aoc-2022"
   :perform (test-op (op c) (symbol-call :rove :run c)))

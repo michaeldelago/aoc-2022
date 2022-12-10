@@ -1,7 +1,6 @@
 (uiop:define-package aoc-2022.3
   (:use :cl
-        :aoc-2022.day
-        :aoc-2022.helpers)
+        :aoc-2022.day)
   (:export #:day-3
            #:run
            #:run-sample-1
@@ -19,12 +18,12 @@
       (do-run day))))
 
 (defmethod part-1 ((this day-3) input)
-  (let ((rucksacks (split-newlines input)))
+  (let ((rucksacks (cl-ppcre:split "\\n" input)))
     (reduce #'+ 
             (mapcar #'get-rucksack-priority rucksacks))))
 
 (defmethod part-2 ((this day-3) input)
-  (let ((rucksacks (split-newlines input)))
+  (let ((rucksacks (cl-ppcre:split "\\n" input)))
     (reduce #'+
             (loop for (a b c) on rucksacks by #'cdddr
                   collect (string-intersection a b c)))))

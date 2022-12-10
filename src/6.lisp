@@ -1,7 +1,6 @@
 (uiop:define-package aoc-2022.6
   (:use :cl
-   :aoc-2022.day
-   :aoc-2022.helpers)
+   :aoc-2022.day)
   (:import-from :cl-ppcre
    #:all-matches-as-strings)
   (:export #:day-6

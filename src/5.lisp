@@ -1,7 +1,6 @@
 (uiop:define-package aoc-2022.5
   (:use :cl
-   :aoc-2022.day
-   :aoc-2022.helpers)
+   :aoc-2022.day)
   (:import-from :cl-ppcre
    #:all-matches-as-strings)
   (:export #:day-5
@@ -53,7 +52,7 @@
 ;;    ((1 2 1) (3 1 3) (2 2 1) (1 1 2))
 (defun parse-input (input)
   "Takes a serialized crate stack and returns the stacks and the instructions afterwards"
-  (let* ((as-lines (split-newlines input))
+  (let* ((as-lines (cl-ppcre:split "\\n" input))
          (relevant-lines (reverse (loop for l in as-lines
                        until (equal l "")
                        collect l)))

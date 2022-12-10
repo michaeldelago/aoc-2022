@@ -1,7 +1,6 @@
 (uiop:define-package aoc-2022.7
   (:use :cl
-   :aoc-2022.day
-   :aoc-2022.helpers)
+   :aoc-2022.day)
   (:import-from :cl-ppcre
    #:all-matches-as-strings)
   (:export #:day-7
@@ -28,7 +27,7 @@
         (do-run day))))
 
 (defmethod part-1 ((this day-7) input)
-  (let* ((lines (split-newlines input))
+  (let* ((lines (cl-ppcre:split "\\n" input))
          (tree (do-filesystem lines))
          (size (alexandria:flatten (get-size tree))) 
          (small-dirs (remove-if-not (lambda (d)
@@ -36,7 +35,7 @@
     (reduce #'+ small-dirs)))
 
 (defmethod part-2 ((this day-7) input)
-  (let* ((lines (split-newlines input))
+  (let* ((lines (cl-ppcre:split "\\n"  input))
          (tree (do-filesystem lines))
          (size (alexandria:flatten (get-size tree)))
          (sorted (sort size #'>))

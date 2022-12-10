@@ -1,7 +1,6 @@
 (uiop:define-package aoc-2022.4
   (:use :cl
-        :aoc-2022.day
-        :aoc-2022.helpers)
+        :aoc-2022.day)
   (:import-from :cl-ppcre
                 #:all-matches-as-strings)
   (:export #:day-4
@@ -31,7 +30,7 @@
           count (apply #'overlapping-jobs-p jobs))))
 
 (defun split-input (input)
-  (loop for line in (split-newlines input)
+  (loop for line in (cl-ppcre:split "\\n" input)
         collect (mapcar #'parse-integer (all-matches-as-strings "\\d+" line))))
 
 (defun subset-jobs-p (a-start a-end b-start b-end)

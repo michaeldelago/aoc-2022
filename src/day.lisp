@@ -35,8 +35,8 @@
     (format t "Part one sample: ~d~%" (part-1 this input))
     (format t "Part two sample: ~d~%" (part-2 this input))))
 
-(defmethod run-sample-1 ((this day))
-  (part-1 this (get-day-sample (day this))))
+(defmethod run-sample-1 ((this day) &optional (alt "test"))
+  (part-1 this (get-day-sample (day this) alt)))
 
-(defmethod run-sample-2 ((this day))
-  (part-2 this (get-day-sample (day this))))
+(defmethod run-sample-2 ((this day) &optional (alt "test"))
+  (part-2 this (get-day-sample (day this) alt)))
