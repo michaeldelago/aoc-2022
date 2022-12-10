@@ -8,15 +8,7 @@
            #:run-sample-2))
 (in-package :aoc-2022.1)
 
-(defclass day-1 (day) 
-  ((day
-     :initform 1)))
-
-(defun run (&optional sample)
-  (let ((day (make-instance 'day-1)))
-   (if sample
-      (do-run-sample day)
-      (do-run day))))
+(defday 1)
 
 (defmethod part-1 ((this day-1) input)
   (apply #'max (get-elves-loads-total input)))

@@ -10,16 +10,7 @@
 (in-package :aoc-2022.6)
 (setq *print-pretty* t)
 
-
-(defclass day-6 (day)
-  ((day
-     :initform 6)))
-
-(defun run (&optional sample)
-  (let ((day (make-instance 'day-6)))
-    (if sample
-        (do-run-sample day)
-        (do-run day))))
+(defday 6)
 
 (defmethod part-1 ((this day-6) input)
   (let ((parsed-input (coerce input 'list)))

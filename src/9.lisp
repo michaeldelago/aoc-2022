@@ -15,15 +15,7 @@
   (tail (vector 0 0))
   (path (list (vector 0 0))))
 
-(defclass day-9 (day)
-  ((day
-     :initform 9)))
-
-(defun run (&optional sample)
-  (let ((day (make-instance 'day-9)))
-    (if sample
-        (do-run-sample day)
-        (do-run day))))
+(defday 9)
 
 ;; simple reduce on the rope
 (defmethod part-1 ((this day-9) input)

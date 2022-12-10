@@ -7,15 +7,7 @@
            #:run-sample-2))
 (in-package :aoc-2022.3)
 
-(defclass day-3 (day) 
-  ((day
-     :initform 3)))
-
-(defun run (&optional sample)
-  (let ((day (make-instance 'day-3)))
-    (if sample
-      (do-run-sample day)
-      (do-run day))))
+(defday 3)
 
 (defmethod part-1 ((this day-3) input)
   (let ((rucksacks (cl-ppcre:split "\\n" input)))

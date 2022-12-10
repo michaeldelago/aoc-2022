@@ -16,15 +16,7 @@
   children
   size)
 
-(defclass day-7 (day)
-  ((day
-     :initform 7)))
-
-(defun run (&optional sample)
-  (let ((day (make-instance 'day-7)))
-    (if sample
-        (do-run-sample day)
-        (do-run day))))
+(defday 7)
 
 (defmethod part-1 ((this day-7) input)
   (let* ((lines (cl-ppcre:split "\\n" input))

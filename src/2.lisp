@@ -7,9 +7,6 @@
            #:run-sample-2))
 (in-package :aoc-2022.2)
 
-(defclass day-2 (day)
-  ((day
-     :initform 2)))
 
 (defparameter *match* '(("A" . ROCK)
                         ("B" . PAPER)
@@ -26,11 +23,7 @@
                               (ROCK . 1)
                               (SCISSORS . 3)))
 
-(defun run (&optional sample)
-  (let ((day (make-instance 'day-2)))
-    (if sample 
-      (do-run-sample day)
-      (do-run day))))
+(defday 2)
 
 (defmethod part-1 ((this day-2) input)
   (let ((splits (split-input input)))

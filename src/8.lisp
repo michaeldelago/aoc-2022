@@ -9,16 +9,7 @@
    #:run-sample-2))
 (in-package :aoc-2022.8)
 
-
-(defclass day-8 (day)
-  ((day
-     :initform 8)))
-
-(defun run (&optional sample)
-  (let ((day (make-instance 'day-8)))
-    (if sample
-        (do-run-sample day)
-        (do-run day))))
+(defday 8)
 
 (defmethod part-1 ((this day-8) input)
   (let ((grid (make-grid (uiop:split-string input :separator '(#\NEWLINE)))))

@@ -10,16 +10,7 @@
 (in-package :aoc-2022.5)
 (setq *print-pretty* t)
 
-
-(defclass day-5 (day)
-  ((day
-     :initform 5)))
-
-(defun run (&optional sample)
-  (let ((day (make-instance 'day-5)))
-    (if sample
-        (do-run-sample day)
-        (do-run day))))
+(defday 5)
 
 (defmethod part-1 ((this day-5) input)
   (multiple-value-bind (init instructions)

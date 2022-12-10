@@ -9,15 +9,7 @@
            #:run-sample-2))
 (in-package :aoc-2022.4)
 
-(defclass day-4 (day) 
-  ((day
-     :initform 4)))
-
-(defun run (&optional sample)
-  (let ((day (make-instance 'day-4)))
-    (if sample
-        (do-run-sample day)
-        (do-run day))))
+(defday 4)
 
 (defmethod part-1 ((this day-4) input)
   (let ((sections (split-input input)))
