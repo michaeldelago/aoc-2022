@@ -50,8 +50,8 @@
       instruction
     (progn
       (if (member (mod (cpu-cycle cpu) 40)  (num-neighbors (cpu-counter cpu)))
-          (push "#" (cpu-pixels cpu))
-          (push "." (cpu-pixels cpu)))
+          (push "⬜" (cpu-pixels cpu))
+          (push "⬛" (cpu-pixels cpu)))
       (incf (cpu-cycle cpu))
       (when (or (eq 20 (cpu-cycle cpu)) 
                 (eq 20 (mod (cpu-cycle cpu) 40)))
