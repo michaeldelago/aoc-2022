@@ -12,13 +12,18 @@
 (defday 8)
 
 (defmethod part-1 ((this day-8) input)
-  (let ((grid (make-grid (uiop:split-string input :separator '(#\NEWLINE)))))
-    (count t (mapcar #'tree-is-visible grid (loop repeat (length input) collect grid)))))
+	(let ((grid (make-grid (uiop:split-string input :separator '(#\NEWLINE)))))
+		(count t (loop for tree being the hash-keys of grid
+									 collect (tree-is-visible 
+														 (cons tree (gethash tree grid)) 
+														 grid)))))
 
 (defmethod part-2 ((this day-8) input)
   (let* ((grid (make-grid (uiop:split-string input :separator '(#\NEWLINE)))))
-    (reduce #'max (mapcar (lambda (tree)
-                            (scenic-score tree grid)) grid))))
+    (reduce #'max (loop for tree being the hash-keys of grid
+												collect (scenic-score 
+																	(cons tree (gethash tree grid)) 
+																	grid)))))
 
 ;; turn a single string grid into a alist
 (defun make-grid (input)
@@ -26,16 +31,18 @@
          (as-ints (mapcar (lambda (l)
                             (map 'list #'digit-char-p l)) input))
          (heights (alexandria:flatten as-ints)))
-    (loop for hght in heights
+    (loop with hash = (make-hash-table :test #'equalp)
+			    for hght in heights
           for index from 0
           for x = (mod index len-grid)
           for y = (floor index len-grid)
-          collect (cons (list x y) hght))))
+          do (setf (gethash (list x y) hash) hght)
+					finally (return hash))))
 
 ;; return true if tree is visible from the outside
 (defun tree-is-visible (tree grid)
   (flet ((tree-visible (other-tree)
-           (> (cdr tree) (alexandria:assoc-value grid other-tree :test #'equalp))))
+           (> (cdr tree) (gethash other-tree grid))))
     (or (tree-on-edge tree grid)
         (some (lambda (x) x) (mapcar (lambda (direction)
                                        (every #'tree-visible direction)) 
@@ -47,26 +54,30 @@
   (destructuring-bind (left right up down)
         (get-neighbors (car tree) grid)
       (* (dist-until-block left tree grid)
-         (dist-until-block right  tree grid)
+         (dist-until-block right tree grid)
          (dist-until-block up tree grid)
          (dist-until-block down tree grid))))
 
 (defun tree-on-edge (tree grid)
   (let* ((y (cadar tree))
          (x (caar tree))
-         (max-x (reduce #'max (loop for coord in grid collect (caar coord))))
-         (max-y (reduce #'max (loop for coord in grid collect (cadar coord)))))
+         (max-x (reduce #'max (loop for coord being the hash-keys of grid 
+																		collect (car coord))))
+         (max-y (reduce #'max (loop for coord being the hash-keys of grid 
+																		collect (cadr coord)))))
     (or (eq x 0) 
         (eq y 0) 
         (eq x max-x) 
         (eq y max-y))))
 
 ;; Get all coordinates of trees in each cardinal direction
-(defun get-neighbors (tree-coord tree-grid)
+(defun get-neighbors (tree-coord grid)
   (let* ((x (car tree-coord))
          (y (cadr tree-coord))
-         (max-x (reduce #'max (loop for coord in tree-grid collect (caar coord))))
-         (max-y (reduce #'max (loop for coord in tree-grid collect (cadar coord)))))
+         (max-x (reduce #'max (loop for coord being the hash-keys of grid 
+																		collect (car coord))))
+         (max-y (reduce #'max (loop for coord being the hash-key of grid 
+																		collect (cadr coord)))))
     (list
       (if (> x 0)
           (loop for this-x downfrom (1- x) to 0 ;; left
@@ -92,6 +103,6 @@
       0
       (loop for o-tree in direction
             for dist from 1
-            if (<= (cdr tree) (alexandria:assoc-value grid o-tree :test #'equalp))
+            if (<= (cdr tree) (gethash o-tree grid))
             return dist
             finally (return dist))))
