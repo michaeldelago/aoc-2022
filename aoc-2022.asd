@@ -24,6 +24,7 @@
                  (:file "8")
                  (:file "9")
                  (:file "10")
+                 (:file "11")
                  (:file "cli"))))
   :description "Advent of Code 2022"
   :in-order-to ((test-op (test-op "aoc-2022/tests")))
@@ -47,6 +48,7 @@
                  (:file "7")
                  (:file "8")
                  (:file "9")
-                 (:file "10"))))
+                 (:file "10")
+                 (:file "11"))))
   :description "Test system for aoc-2022"
   :perform (test-op (op c) (symbol-call :rove :run c)))
